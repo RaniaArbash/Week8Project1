@@ -27,16 +27,19 @@ public class DatabaseClient {
         appDatabase = Room.databaseBuilder(mCtx, AppDatabase.class, "MyToDos").build();
     }
 
-    public static synchronized DatabaseClient getInstance(Context mCtx) {
+    public static DatabaseClient getInstance(Context mCtx) {
         if (mInstance == null) {
             mInstance = new DatabaseClient(mCtx);
         }
         return mInstance;
     }
 
+
     public AppDatabase getAppDatabase() {
         return appDatabase;
     }
+
+
 
     public static void insert(Context context, Task task){
         DatabaseClient.databaseWriteExecutor.execute(()->{
@@ -45,6 +48,8 @@ public class DatabaseClient {
                     .insert(task);
         });
     }
+
+
     public static void update(Context context, Task task){
         DatabaseClient.databaseWriteExecutor.execute(()->{
 

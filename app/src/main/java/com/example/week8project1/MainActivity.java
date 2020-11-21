@@ -43,12 +43,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getAllTasks(Context context){
-
+//  ()->{}
         DatabaseClient.databaseWriteExecutor.execute(()->{
             List<Task>  tasks = DatabaseClient.getInstance(context).getAppDatabase()
                     .taskDao().getAll();
-            TasksAdapter adapter = new TasksAdapter(context, tasks);
-            recyclerView.setAdapter(adapter);
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    TasksAdapter adapter = new TasksAdapter(context, tasks);
+                    recyclerView.setAdapter(adapter);
+                }
+            });
 
         });
 

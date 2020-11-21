@@ -14,6 +14,9 @@ public interface TaskDao {
     @Query("SELECT * FROM task")
     List<Task> getAll();
 
+//    @Query("SELECT * FROM task WHERE finished ")
+//    List<Task> getCompletedTask();
+//
     @Insert
     void insert(Task task);
 
